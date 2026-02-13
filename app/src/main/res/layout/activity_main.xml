@@ -32,9 +32,11 @@
             android:layout_marginBottom="4dp"/>
 
         <SurfaceView
+            android:id="@+id/faceSurfaceView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/material_dynamic_neutral0" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#CCCCCC" />
     </LinearLayout>
 <!--this layout contains all the controls [right side]-->
     <LinearLayout
