@@ -29,7 +29,7 @@ public class Face
     // a random color to
     // skinColor, eyeColor, hairColor, and hairStyle
     // using randomColor method
-    private void randomize()
+    void randomize()
     {
         skinColor = randomColor();
 
@@ -37,18 +37,18 @@ public class Face
 
         hairColor = randomColor();
 
-        hairStyle = randomColor();
+        hairStyle = rand.nextInt(3);
     }
     // helper method :
     // generates a random color
     // by assigning different values for r, g, and b
     private int randomColor()
     {
-        int r = rand.nextInt(255);
+        int r = rand.nextInt(256);
 
-        int g = rand.nextInt(255);
+        int g = rand.nextInt(256);
 
-        int b = rand.nextInt(255);
+        int b = rand.nextInt(256);
 
         return Color.rgb(r,g,b);
     }
@@ -96,18 +96,34 @@ public class Face
         paint.setColor(hairColor);
         switch(hairStyle)
         {
-            case 0: // flat top
+            case 0: // short flat top
                 canvas.drawRect(cx - radius, cy - radius, cx + radius, cy - radius / 2, paint);
                 break;
 
             case 1:
-                canvas.drawRect(cx - radius, cy - radius, cx + radius, cy - radius/ 3, paint );
+                // top hair
+                canvas.drawOval(cx - radius, cy - radius * 1.1f, cx + radius, cy - radius * 0.4f, paint);
+
+                // bangs
+                canvas.drawOval(cx - radius * 0.6f, cy - radius * 0.55f,
+                        cx + radius * 0.6f, cy - radius * 0.25f, paint);
                 break;
 
-            case 2: // round cap
+            case 2:
             default:
-                canvas.drawCircle(cx, cy - radius / 2, radius* 0.7f, paint);
+                // top hair
+                canvas.drawOval(cx - radius, cy - radius * 1.2f,
+                        cx + radius, cy - radius * 0.3f, paint);
+
+                // left side hair
+                canvas.drawRect(cx - radius * 1.1f, cy - radius * 0.3f,
+                        cx - radius * 0.7f, cy + radius * 0.9f, paint);
+
+                // right side hair
+                canvas.drawRect(cx + radius * 0.7f, cy - radius * 0.3f,
+                        cx + radius * 1.1f, cy + radius * 0.9f, paint);
                 break;
+
         }
     }
 }

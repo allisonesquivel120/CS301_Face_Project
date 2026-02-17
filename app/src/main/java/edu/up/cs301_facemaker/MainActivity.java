@@ -9,21 +9,20 @@ import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+// @author Allison E.
 
 public class MainActivity extends AppCompatActivity
 {
     private Face face;
-    private FaceSurfaceView faceView;
-
+    private FaceSurfaceView faceView; // custom surfaceView that shows the face
     private SeekBar redSB, greenSB, blueSB;
     private RadioGroup featureGroup;
     private Spinner hairSpinner;
     private Button randomButton;
 
     private FaceController controller;
+    // options for hair style spinner
     String[] hairStyles = {"Short", "Medium", "Long"};
 
     @Override
@@ -32,9 +31,9 @@ public class MainActivity extends AppCompatActivity
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        face = new Face();
+        face = new Face(); // create new random face
         faceView = findViewById(R.id.faceSurfaceView);
-        faceView.setFace(face);
+        faceView.setFace(face); // connect model to drawing view
 
         // colors
         redSB = findViewById(R.id.redSeekBar);
@@ -53,9 +52,11 @@ public class MainActivity extends AppCompatActivity
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hairSpinner.setAdapter(adapter);
 
-        // controller
+        // controller attache all listeners
         controller = new FaceController(faceView, face, redSB, greenSB, blueSB, featureGroup, hairSpinner);
+
         randomButton.setOnClickListener(controller);
+
         hairSpinner.setSelection(face.hairStyle);
         syncSeekBarsToFace();
 

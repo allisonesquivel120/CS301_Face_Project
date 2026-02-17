@@ -6,19 +6,24 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+// FaceSurfaceView
+// This class is responsible for drawing the face model onto the screen
+// @author Allison E.
+
 public class FaceSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
-    private Face face;
+    private Face face; // face model that will be drawn on the screen
 
     public FaceSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         getHolder().addCallback(this);
+        // lets drawing use lockCanvas()
         setWillNotDraw(false);
     }
 
     public void setFace(Face f) {
         this.face = f;
-        redraw();
+        redraw(); // draw immediately when face is set
     }
 
     public void redraw() {
@@ -28,12 +33,13 @@ public class FaceSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         if (canvas != null) {
             canvas.drawColor(0xFFFFFFFF); // white background
             if (face != null) {
-                face.onDraw(canvas);
+                face.onDraw(canvas); // draw face if it exist
             }
             holder.unlockCanvasAndPost(canvas);
         }
     }
 
+    // draw when surface appears
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         redraw();

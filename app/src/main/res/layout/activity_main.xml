@@ -31,12 +31,11 @@
             android:text="Face Preview"
             android:layout_marginBottom="4dp"/>
 
-        <SurfaceView
+        <edu.up.cs301_facemaker.FaceSurfaceView
             android:id="@+id/faceSurfaceView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#CCCCCC" />
+            android:layout_weight="1" />
     </LinearLayout>
 <!--this layout contains all the controls [right side]-->
     <LinearLayout
@@ -55,7 +54,7 @@
             android:layout_marginBottom="12dp"/>
 
 <!--    contains rado buttons-->
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/allRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Skin" />
-        </LinearLayout>
+        </RadioGroup>
 
         <LinearLayout
             android:id="@+id/controls"

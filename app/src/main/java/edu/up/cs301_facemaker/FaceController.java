@@ -7,11 +7,13 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
-
+// FaceController
+// This class acts as the controller, it listens to all user interactions.
+// @author Allison E.
 public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
-    private Face face;
-
-    private FaceSurfaceView view;
+    // instance variables
+    private Face face; // the model
+    private FaceSurfaceView view; // custom surface view
 
     private SeekBar redSB;
     private SeekBar greenSB;
@@ -20,8 +22,10 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
 
     private Spinner hairSpinner;
 
+    // tracks which feature is currently selected
     private int selectedFeature = 1;
 
+    // attaches all listeners + stores references to the model & view
     public FaceController(FaceSurfaceView view, Face face, SeekBar redSB, SeekBar greenSB, SeekBar blueSB, RadioGroup featureGroup, Spinner hairSpinner)
     {
         this.view = view;
@@ -32,12 +36,13 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
         this.blueSB = blueSB;
         this.featureGroup = featureGroup;
         this.hairSpinner = hairSpinner;
-
+        // seekbar listeners
         redSB.setOnSeekBarChangeListener(this);
         greenSB.setOnSeekBarChangeListener(this);
         blueSB.setOnSeekBarChangeListener(this);
-
+        // radiogroup listeners
         featureGroup.setOnCheckedChangeListener(this);
+        // spinner listener
         hairSpinner.setOnItemSelectedListener(this);
 
     }
@@ -51,7 +56,7 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
         int g = greenSB.getProgress();
         int b = blueSB.getProgress();
         int color = Color.rgb(r, g, b);
-
+        // updates the correct feature
         if(selectedFeature == 0)
         {
             face.hairColor = color;
@@ -78,7 +83,6 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
 
     }
     // radioGroup listener
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId)
     {
@@ -97,8 +101,7 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
 
         syncSeekBars();
     }
-    // spinner listener
-
+    // spinner listener --> user selects hair style
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
@@ -119,7 +122,7 @@ public class FaceController implements SeekBar.OnSeekBarChangeListener, RadioGro
         view.redraw();
 
     }
-// helper method: sync the seekbar to selected feature color
+    // helper method: sync the seekbar to selected feature color
     private void syncSeekBars() {
         int color;
 
